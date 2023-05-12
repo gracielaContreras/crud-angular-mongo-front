@@ -1,0 +1,1 @@
+# crud-angular-mongo-front
