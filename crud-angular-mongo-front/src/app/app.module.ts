@@ -8,10 +8,18 @@ import { AppComponent } from './app.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ListComponent } from './product/list.component';
+import { DetailComponent } from './product/detail.component';
+import { CreateComponent } from './product/create.component';
+import { UpdateComponent } from './product/update.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListComponent,
+    DetailComponent,
+    CreateComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
