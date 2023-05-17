@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { Route, ActivatedRoute, Router } from '@angular/router';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  product: Product | undefined;
+
+  constructor(
+    private productService: ProductService,
+    private toast:ToastrService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute  //permite capturar el id desde la url
+  ) { }
 
   ngOnInit(): void {
+    this.getProduct();
+  }
+  getProduct(): void{
+    const id = this.activatedRoute.snapshot.params['id'];
+    this.productService.detail(id).subscribe(
+      data =>{
+          this.product = data;
+      },
+      err => {
+        this.toast.error(err.error.message, 'Error', { timeOut: 3000, positionClass: 'toast-top-center'});
+        this.router.navigate(['']);
+      }
+    );
   }
 
 }

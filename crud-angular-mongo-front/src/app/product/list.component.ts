@@ -28,7 +28,6 @@ export class ListComponent implements OnInit {
     this.productService.list().subscribe(
       data => {
         this.products = data;
-        console.log(this.products);
       },
       err => {
         this.toast.error(err.error.message, 'Error', { timeOut: 3000, positionClass: 'toast-top-center'});

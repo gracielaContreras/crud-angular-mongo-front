@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 
-<div class="container">
+<div class="container" *ngIf="product">
     <div class="row mt-5">
         <div class="col-md-4 mx-auto">
             <div class="card">
@@ -9,9 +9,9 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>ID: </b>1</li>
-                        <li class="list-group-item"><b>Name: </b>Mark</li>
-                        <li class="list-group-item"><b>Price: </b>$20000</li>
+                        <li class="list-group-item"><b>ID: </b>{{product.id}}</li>
+                        <li class="list-group-item"><b>Name: </b>{{product.name}}</li>
+                        <li class="list-group-item"><b>Price: </b>$ {{product.price}}</li>
                     </ul>
                 </div>
                 <div class="card-footer">
