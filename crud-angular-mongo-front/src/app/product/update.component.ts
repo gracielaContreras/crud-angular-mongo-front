@@ -12,7 +12,8 @@ import { Product } from '../model/product';
 export class UpdateComponent implements OnInit {
 
   id!: number;
-  product!: Product;
+  name!: string;
+  price!: number;
 
   constructor(
     private productService: ProductService,
@@ -25,7 +26,8 @@ export class UpdateComponent implements OnInit {
     this.getProduct();
   }
   onUpdate():void{
-    this.productService.update(this.id, this.product).subscribe(
+    const product = new Product(this.name, this.price);
+    this.productService.update(this.id, product).subscribe(
       data => {
         this.toast.success(data.message, 'OK', { timeOut: 3000, positionClass: 'toast-top-center'});
         this.router.navigate(['']);
@@ -38,15 +40,8 @@ export class UpdateComponent implements OnInit {
 
   getProduct(): void{
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.productService.detail(this.id).subscribe(
-      data =>{
-          this.product = data;
-      },
-      err => {
-        this.toast.error(err.error.message, 'Error', { timeOut: 3000, positionClass: 'toast-top-center'});
-        this.router.navigate(['']);
-      }
-    );
+    this.name = this.activatedRoute.snapshot.params['name'];
+    this.price = this.activatedRoute.snapshot.params['price'];
   }
 
 }
