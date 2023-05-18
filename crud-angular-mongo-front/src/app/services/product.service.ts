@@ -29,4 +29,8 @@ export class ProductService {
   public update(id: number, product: Product): Observable<any>{
     return this.httpClient.put<any>(this.productURL + `/${id}`, product);
   }
+  //Obtenemos eliminar producto desde el back
+  public delete(id: number): Observable<any>{
+    return this.httpClient.delete<any>(this.productURL + `/${id}`);
+  }
 }
