@@ -25,4 +25,8 @@ export class ProductService {
   public create(product: Product): Observable<any>{
     return this.httpClient.post<any>(this.productURL, product);
   }
+  //Obtenemos el actualizar un producto desde el back
+  public update(id: number, product: Product): Observable<any>{
+    return this.httpClient.put<any>(this.productURL + `/${id}`, product);
+  }
 }
