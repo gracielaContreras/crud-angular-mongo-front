@@ -18,7 +18,7 @@
             <td>{{prod.name}}</td>
             <td>$ {{prod.price}}</td>
             <td><button class="btn btn-outline-primary" routerLink="/detail/{{prod.id}}"><i class="far fa-eye"></i>View</button></td>
-            <td><button class="btn btn-outline-warning" routerLink="/update/{{prod.id}}/{{prod.name}}/{{prod.price}}"><i class="far fa-edit"></i>Edit</button></td>
+            <td><button class="btn btn-outline-warning" (click)="setProduct(prod)"><i class="far fa-edit"></i>Edit</button></td>
             <td><button class="btn btn-outline-danger" (click)="onDelete(prod.id)"><i class="far fa-trash-alt"></i>Delete</button></td>
           </tr>
         </tbody>

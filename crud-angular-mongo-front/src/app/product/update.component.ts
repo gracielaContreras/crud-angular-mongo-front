@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../model/product';
+import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update',
@@ -10,24 +11,21 @@ import { Product } from '../model/product';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
-
-  id!: number;
-  name!: string;
-  price!: number;
+  
+  product!: Product;
 
   constructor(
     private productService: ProductService,
     private toast:ToastrService,
     private router: Router,
-    private activatedRoute: ActivatedRoute  //permite capturar el id desde la url
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
     this.getProduct();
   }
   onUpdate():void{
-    const product = new Product(this.name, this.price);
-    this.productService.update(this.id, product).subscribe(
+    this.productService.update(this.product.id, this.product).subscribe(
       data => {
         this.toast.success(data.message, 'OK', { timeOut: 3000, positionClass: 'toast-top-center'});
         this.router.navigate(['']);
@@ -39,9 +37,8 @@ export class UpdateComponent implements OnInit {
   }
 
   getProduct(): void{
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.name = this.activatedRoute.snapshot.params['name'];
-    this.price = this.activatedRoute.snapshot.params['price'];
+    this.product = this.storageService.getProduct();
+    this.storageService.clear();
   }
 
 }
