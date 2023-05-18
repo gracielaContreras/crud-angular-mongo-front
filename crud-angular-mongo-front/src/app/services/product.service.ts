@@ -17,8 +17,12 @@ export class ProductService {
   public list(): Observable<Product[]>{
     return this.httpClient.get<Product[]>(this.productURL)
   }
-    //Obtenemos un producto desde el back
-    public detail(id: number): Observable<Product>{
-      return this.httpClient.get<Product>(this.productURL + `/${id}`);
-    }
+  //Obtenemos un producto desde el back
+  public detail(id: number): Observable<Product>{
+    return this.httpClient.get<Product>(this.productURL + `/${id}`);
+  }
+  //Obtenemos el crear un producto desde el back
+  public create(product: Product): Observable<any>{
+    return this.httpClient.post<any>(this.productURL, product);
+  }
 }
